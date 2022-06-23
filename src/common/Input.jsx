@@ -1,8 +1,11 @@
 import React from 'react'
+import './Input.css'
 
-const Input = () => {
+const Input = (labelText,placeholderText ,onChange) => {
   return (
-    <div>Input</div>
+    <label htmlFor="">
+      <input className='input' type="text" placeholder={placeholderText} />
+    </label>
   )
 }
 

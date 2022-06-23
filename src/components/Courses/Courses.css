@@ -1,0 +1,10 @@
+.main {
+    padding: 30px;
+    border: 1px solid skyblue;
+    min-height: 80vh;
+}
+
+.main-top{
+    display: flex;
+    justify-content: space-between;
+}
