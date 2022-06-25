@@ -1,10 +1,11 @@
 import React from 'react'
 import './Input.css'
 
-const Input = (labelText,placeholderText ,onChange) => {
+const Input = ({labelText,placeholderText ,onChange}) => {
   return (
-    <label htmlFor="">
-      <input className='input' type="text" placeholder={placeholderText} />
+    <label className="input-wrapper" htmlFor="">
+    {labelText}
+      <input onChange={onChange} className='input' type="text" placeholder={placeholderText} />
     </label>
   )
 }

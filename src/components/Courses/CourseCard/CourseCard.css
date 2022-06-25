@@ -1,0 +1,35 @@
+.course{
+    border: 1px solid purple;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.course-left{
+    width: 70%;
+}
+
+.course-left-title{
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.course-left-text{
+    margin-top: 10px;
+}
+
+.course-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    align-items: center;
+}
+
+.course-right-block{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+}

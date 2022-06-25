@@ -1,0 +1,81 @@
+.createcourse{
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    border: 1px solid purple;
+    padding: 30px;
+}
+
+.createcourse-text > span {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.createcourse-top{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.createcourse-top-area{
+    resize: vertical;
+    min-height: 100px;
+    max-height: 200px;
+    
+}  
+
+.createcourse-top-heading{
+    display: flex;
+    justify-content: space-between;
+}
+
+.createcourse-bottom{
+    display: flex;
+    justify-content: space-around;
+    border: 1px solid red;
+    margin-top: 30px;
+    padding: 30px;
+}
+.createcourse-bottom-left{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.createcourse-bottom-left-author{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.createcourse-bottom-left-duration{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+
+.createcourse-bottom-right{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.createcourse-bottom-right-list-item{
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.createcourse-heading{
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.textarea-wrapper{
+    display: flex;
+    flex-direction: column;
+}

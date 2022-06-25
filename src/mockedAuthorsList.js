@@ -16,3 +16,5 @@ const mockedAuthorsList = [
     name: 'Valentina Larina'
     },
     ]
+
+export default mockedAuthorsList
