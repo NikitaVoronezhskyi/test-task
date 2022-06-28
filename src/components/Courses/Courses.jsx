@@ -7,22 +7,22 @@ import "./Courses.css";
 import CourseCard from "./CourseCard/CourseCard";
 import timeConvert from "../../helper/TimeConverter";
 
-const Courses = () => {
+const Courses = ({activeForm}) => {
   function getAuthors(requiredAuthors,authorsArray){
     authorsArray.filter((exsistingAuthor)=>{
       
     })
     }
 
-      
-
-
+    function changeFormState(currentState) {
+      activeForm(true)
+    }
+     
   return (
-    <main>
       <div className="container main">
         <div className="main-top">
           <SearchBar />
-          <Button text="Add New Course" />
+          <Button onClick={changeFormState} text="Add New Course" />
         </div>
         {mockedCoursesList.map((course) => {
          return <CourseCard
@@ -35,7 +35,6 @@ const Courses = () => {
           />;
         })}
       </div>
-    </main>
   );
 };
 

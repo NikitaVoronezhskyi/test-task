@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
+import { useState } from 'react'
 import Input from '../../../common/Input'
 import Button from '../../../common/Button'
 import './SearchBar.css'
 
 const SearchBar = () => {
-  const [input,setInput] = useState('')
   return (
     <div className='searchbar'>
-      <Input placeholderText="Enter course name..."/>
+      <Input name="search" placeholderText="Enter course name..."/>
       <Button text="Search" size="medium"/>
     </div>
   )

@@ -1,7 +1,6 @@
 .createcourse{
     display: flex;
     flex-direction: column;
-    margin-top: 100px;
     border: 1px solid purple;
     padding: 30px;
 }
