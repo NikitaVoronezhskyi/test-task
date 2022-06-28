@@ -11,7 +11,7 @@ const CourseCard = ({title,desc,duration,date,authors}) => {
     </div>
     <div className="course-right">
         <div className="course-right-block">
-        <p>Authors:{authors}</p>
+        <p className='course-right-block-authors'>Authors:{authors}</p>
         <p>Duration:{duration}</p>
         <p>Created:{date}</p>
         </div>

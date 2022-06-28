@@ -2,12 +2,14 @@
     border: 1px solid purple;
     padding: 15px;
     display: flex;
+    align-items: center;
     justify-content: space-between;
     margin-top: 30px;
+    min-height: 150px;
 }
 
 .course-left{
-    width: 70%;
+    flex: 0.7;
 }
 
 .course-left-title{
@@ -21,6 +23,7 @@
 
 .course-right{
     display: flex;
+    flex: 0.25;
     flex-direction: column;
     justify-content: center;
     gap: 10px;
@@ -32,4 +35,11 @@
     flex-direction: column;
     justify-content: center;
     gap: 5px;
+}
+
+.course-right-block-authors{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical; 
+    overflow: hidden;
 }

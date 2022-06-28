@@ -9,10 +9,15 @@ import timeConvert from "../../helper/TimeConverter";
 
 const Courses = ({activeForm,coursesList,setCoursesList}) => {
   function getAuthors(requiredAuthors,authorsArray){
-    authorsArray.filter((exsistingAuthor)=>{
-      
+    const output = authorsArray.filter((author)=> {
+      return  requiredAuthors.indexOf(author.id) !== -1;
+    });
+    const names = output.map(author =>{
+      return author.name
     })
-    }
+    const stringOfNames = names.join(",")
+    return stringOfNames
+  }
 
     function changeFormState(currentState) {
       activeForm(true)

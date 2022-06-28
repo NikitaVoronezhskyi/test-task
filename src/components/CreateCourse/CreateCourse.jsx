@@ -9,6 +9,7 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
   const [createAuthorName, setcreateAuthorName] = useState("");
   const [authorArray, setAuthorArray] = useState(mockedAuthorsList);
   const [currentCourseAuthors, setcurrentCourseAuthors] = useState([]);
+  const [duration, setDuration] = useState(timeConvert("0"))
 
   function newAuthor() {
     const author = {
@@ -21,19 +22,26 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
     });
   }
 
-  function createCourse() {
+  function createCourse(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
     const newCourse = {
       id: Math.ceil(Date.now() * Math.random()),
       authors: currentCourseAuthors.map((author)=>{return author.id}),
-      title: "Place Title",
-      description: "some description",
       creationDate: new Date().toLocaleDateString(),
-      duration: 120
+    }
+    for (const pair of formData) {
+      newCourse[pair[0]] = pair[1].trim();
     }
     setCoursesList(prev => {
       return [...prev,newCourse]
     })
     activeForm(false);
+  }
+
+  function changeTime(e) {
+    const time = timeConvert(e.target.value)
+    setDuration(time)
   }
 
   return (
@@ -46,7 +54,7 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
             labelText={"Title"}
             required="required"
           />
-          <Button onClick={createCourse} type="submit" text="Create Course" />
+          <Button onSubmit={createCourse} type="submit" text="Create Course" />
         </div>
         <label className="textarea-wrapper" htmlFor="">
           Description
@@ -66,8 +74,6 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
               name="Authors"
               placeholderText="Enter author name"
               labelText={"Author name"}
-              required="required"
-              onChange={setAuthorArray}
             />
             <Button onClick={newAuthor} text="Create Author" />
           </div>
@@ -79,9 +85,10 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
               labelText={"Duration"}
               required="required"
               type="number"
+              onChange={e=>{changeTime(e)}}
             />
             <p className="createcourse-text">
-              Duration: <span>{}</span> hours
+              Duration: <span>{duration}</span> hours
             </p>
           </div>
         </div>
