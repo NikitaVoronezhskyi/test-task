@@ -5,7 +5,7 @@ import "./CreateCourse.css";
 import mockedAuthorsList from "../../mockedAuthorsList";
 import timeConvert from "../../helper/TimeConverter";
 import { useState } from "react";
-const CreateCourse = ({ activeForm }) => {
+const CreateCourse = ({ activeForm, setCoursesList }) => {
   const [createAuthorName, setcreateAuthorName] = useState("");
   const [authorArray, setAuthorArray] = useState(mockedAuthorsList);
   const [currentCourseAuthors, setcurrentCourseAuthors] = useState([]);
@@ -22,6 +22,17 @@ const CreateCourse = ({ activeForm }) => {
   }
 
   function createCourse() {
+    const newCourse = {
+      id: Math.ceil(Date.now() * Math.random()),
+      authors: currentCourseAuthors.map((author)=>{return author.id}),
+      title: "Place Title",
+      description: "some description",
+      creationDate: new Date().toLocaleDateString(),
+      duration: 120
+    }
+    setCoursesList(prev => {
+      return [...prev,newCourse]
+    })
     activeForm(false);
   }
 

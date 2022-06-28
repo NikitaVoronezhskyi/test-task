@@ -7,7 +7,7 @@ import "./Courses.css";
 import CourseCard from "./CourseCard/CourseCard";
 import timeConvert from "../../helper/TimeConverter";
 
-const Courses = ({activeForm}) => {
+const Courses = ({activeForm,coursesList,setCoursesList}) => {
   function getAuthors(requiredAuthors,authorsArray){
     authorsArray.filter((exsistingAuthor)=>{
       
@@ -24,7 +24,7 @@ const Courses = ({activeForm}) => {
           <SearchBar />
           <Button onClick={changeFormState} text="Add New Course" />
         </div>
-        {mockedCoursesList.map((course) => {
+        {coursesList.map((course) => {
          return <CourseCard
             title={course.title}
             duration={timeConvert(course.duration)}
