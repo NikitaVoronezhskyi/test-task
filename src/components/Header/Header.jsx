@@ -1,22 +1,21 @@
-import React from 'react'
 import Button from '../../common/Button';
-import Logo from './components/Logo'
+import Logo from './components/Logo/Logo';
 import './Header.css';
 
 const Header = () => {
   return (
-    <header className='header'>
+    <header className="header">
       <div className="container">
-      <nav className="navbar">
-        <Logo className="navbar-logo"/>
-      <div className="navbar-right">
-      <p>Dave</p> 
-      <Button size="btn-sm" text="Logout"/>
-      </div>
-      </nav>
+        <nav className="navbar">
+          <Logo />
+          <div className="navbar-right">
+            <p>Dave</p>
+            <Button size="btn-sm" buttonText="Logout" />
+          </div>
+        </nav>
       </div>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

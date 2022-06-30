@@ -6,15 +6,26 @@ import mockedCoursesList from './mockedCoursesList';
 import { useState } from 'react';
 
 function App() {
-  const [activeForm, setactiveForm] = useState(false)
-  const [coursesList, setCoursesList] = useState(mockedCoursesList)
+  const [activeForm, setActiveForm] = useState(false);
+  const [coursesList, setCoursesList] = useState(mockedCoursesList);
   return (
     <div className="App">
-    <Header/>
-    <main>
-    {!activeForm &&<Courses coursesList={coursesList} setCoursesList={setCoursesList}  activeForm={setactiveForm}/> }
-    {activeForm && <CreateCourse setCoursesList={setCoursesList} coursesList={coursesList} activeForm={setactiveForm}/>}
-    </main>
+      <Header />
+      <main>
+        {!activeForm && (
+          <Courses
+            coursesList={coursesList}
+            activeForm={setActiveForm}
+          />
+        )}
+        {activeForm && (
+          <CreateCourse
+            setCoursesList={setCoursesList}
+            coursesList={coursesList}
+            activeForm={setActiveForm}
+          />
+        )}
+      </main>
     </div>
   );
 }

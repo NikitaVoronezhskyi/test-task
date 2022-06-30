@@ -1,14 +1,12 @@
-import React from 'react'
-import './Input.css'
+import './Input.css';
 
-const Input = ({labelText,placeholderText,name ,onChange,required,type,value,max,min}) => {
+const Input = ({ type, labelText, placeholderText, ...props }) => {
   return (
-    <label className="input-wrapper" htmlFor="">
-    {labelText}
-      {!required && <input value={value} max={max} min={min} onChange={onChange} name={name} className='input' type="text" placeholder={placeholderText} />}
-      {required && <input value={value} max={max} min={min} type={type} onChange={onChange} name={name} className='input' placeholder={placeholderText} required /> }
+    <label className="input-wrapper">
+      {labelText}
+      <input type={type || 'text'} {...props} placeholder={placeholderText} />
     </label>
-  )
-}
+  );
+};
 
-export default Input
+export default Input;

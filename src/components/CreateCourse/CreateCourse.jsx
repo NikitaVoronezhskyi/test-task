@@ -1,94 +1,104 @@
-import React from "react";
-import Button from "../../common/Button";
-import Input from "../../common/Input";
-import "./CreateCourse.css";
-import mockedAuthorsList from "../../mockedAuthorsList";
-import timeConvert from "../../helper/TimeConverter";
-import { useState } from "react";
+import Button from '../../common/Button';
+import Input from '../../common/Input';
+import './CreateCourse.css';
+import mockedAuthorsList from '../../mockedAuthorsList';
+import pipeDuration from '../../helpers/pipeDuration';
+import { useState } from 'react';
 const CreateCourse = ({ activeForm, setCoursesList }) => {
-  const [createAuthorName, setcreateAuthorName] = useState("");
   const [authorArray, setAuthorArray] = useState(mockedAuthorsList);
-  const [currentCourseAuthors, setcurrentCourseAuthors] = useState([]);
-  const [duration, setDuration] = useState(timeConvert("0"))
-
-  function newAuthor() {
-    const author = {
+  const [courseAuthors, setCourseAuthors] = useState([]);
+  const [duration, setDuration] = useState(0);
+  function newAuthor(event) {
+    event.preventDefault();
+    const newAuthor = {
       id: Date.now(),
-      name: "Here is New Author",
+      name: event.target.newAuthorName.value.trim(),
     };
-    setAuthorArray((prev) => {
-      const newArray = [...prev, author];
-      return newArray;
-    });
+    setAuthorArray((prev) => [...prev, newAuthor]);
+    event.target.reset();
   }
 
   function createCourse(e) {
     e.preventDefault();
-    const formData = new FormData(e.target);
     const newCourse = {
-      id: Math.ceil(Date.now() * Math.random()),
-      authors: currentCourseAuthors.map((author)=>{return author.id}),
-      creationDate: new Date().toLocaleDateString(),
-    }
-    for (const pair of formData) {
-      newCourse[pair[0]] = pair[1].trim();
-    }
-    setCoursesList(prev => {
-      return [...prev,newCourse]
-    })
+      id: Date.now(),
+      authors: courseAuthors.map((author) => author.id),
+      creationDate: new Date().toJSON(),
+      duration,
+      title: e.target.title.value.trim(),
+      description: e.target.description.value.trim(),
+    };
+    setCoursesList((prev) => [...prev, newCourse]);
     activeForm(false);
   }
 
   function changeTime(e) {
-    const time = timeConvert(e.target.value)
-    setDuration(time)
+    setDuration(Number(e.target.value));
+  }
+
+  function addAuthorToCourse(currentAuthor) {
+    setCourseAuthors((prev) => [...prev, currentAuthor]);
+    setAuthorArray(
+      authorArray.filter((author) => author.id !== currentAuthor.id)
+    );
+  }
+
+  function removeAuthorFromCourse(currentAuthor) {
+    setAuthorArray((prev) => [...prev, currentAuthor]);
+    setCourseAuthors(
+      courseAuthors.filter((author) => author.id !== currentAuthor.id)
+    );
   }
 
   return (
-    <form className="createcourse container">
-      <div className="createcourse-top">
+    <div className="createcourse container">
+      <form className="createcourse-top" onSubmit={createCourse}>
         <div className="createcourse-top-heading">
           <Input
-            name="Title"
+            name="title"
             placeholderText="Enter Title"
-            labelText={"Title"}
+            labelText={'Title'}
             required="required"
           />
-          <Button onSubmit={createCourse} type="submit" text="Create Course" />
+          <Button type="submit" buttonText="Create Course" />
         </div>
-        <label className="textarea-wrapper" htmlFor="">
+        <label className="textarea-wrapper">
           Description
           <textarea
             className="createcourse-top-area"
             name="description"
-            placeholder="Enter descroption"
-            required="required"
+            placeholder="Enter description"
+            required
           ></textarea>
         </label>
-      </div>
+      </form>
       <div className="createcourse-bottom">
         <div className="createcourse-bottom-left">
-          <div className="createcourse-bottom-left-author">
+          <form
+            className="createcourse-bottom-left-author"
+            onSubmit={newAuthor}
+          >
             <h3 className="createcourse-heading">Add Author</h3>
             <Input
-              name="Authors"
+              name="newAuthorName"
               placeholderText="Enter author name"
-              labelText={"Author name"}
+              labelText="Author name"
             />
-            <Button onClick={newAuthor} text="Create Author" />
-          </div>
+            <Button type="submit" buttonText="Create Author" />
+          </form>
           <div className="createcourse-bottom-left-duration">
             <h3 className="createcourse-heading">Duration</h3>
             <Input
               name="Duration"
               placeholderText="Enter Duration"
-              labelText={"Duration"}
+              labelText={'Duration'}
               required="required"
               type="number"
-              onChange={e=>{changeTime(e)}}
+              value={duration}
+              onChange={changeTime}
             />
             <p className="createcourse-text">
-              Duration: <span>{duration}</span> hours
+              Duration: <span>{pipeDuration(duration)}</span> hours
             </p>
           </div>
         </div>
@@ -102,21 +112,10 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
                     key={author.id}
                     className="createcourse-bottom-right-list-item"
                   >
-                    {author.name}{" "}
+                    {author.name}{' '}
                     <Button
-                      onClick={() => {
-                        const currentAuthor = authorArray.find(
-                          (currentAuthor) => author.id === currentAuthor.id
-                        );
-                        setcurrentCourseAuthors((prev) => {
-                          return [...prev, currentAuthor];
-                        });
-                        setAuthorArray(prev=>{
-                          const newArray = authorArray.filter((author)=>{return author.id !== currentAuthor.id})
-                          return newArray
-                        })
-                      }}
-                      text="Add Author"
+                      onClick={() => addAuthorToCourse(author)}
+                      buttonText="Add Author"
                     />
                   </li>
                 );
@@ -126,25 +125,16 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
           <div className="createcourse-bottom-right-currentauthors">
             <h3 className="createcourse-heading">Course Authors</h3>
             <ul className="createcourse-bottom-right-currentlist">
-              {currentCourseAuthors.map((author) => {
+              {courseAuthors.map((author) => {
                 return (
                   <li
                     key={author.id}
                     className="createcourse-bottom-right-list-item"
                   >
-                    {author.name}{" "}
+                    {author.name}{' '}
                     <Button
-                      onClick={() => {
-                        const currentAuthor = currentCourseAuthors.find((author)=>{return author.id})
-                        setcurrentCourseAuthors(prev =>{
-                          const currentAuthorArray = currentCourseAuthors.filter((current)=>{return current.id !== currentAuthor.id})
-                          return currentAuthorArray
-                        })
-                        setAuthorArray(prev=>{
-                          return [...prev,currentAuthor]
-                        })
-                      }}
-                      text="Delete Author"
+                      onClick={() => removeAuthorFromCourse(author)}
+                      buttonText="Delete Author"
                     />
                   </li>
                 );
@@ -153,7 +143,7 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
           </div>
         </div>
       </div>
-    </form>
+    </div>
   );
 };
 

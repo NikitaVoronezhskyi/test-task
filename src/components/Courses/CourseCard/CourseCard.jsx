@@ -1,24 +1,31 @@
-import React from 'react'
-import Button from '../../../common/Button'
-import './CourseCard.css'
+import Button from '../../../common/Button';
+import pipeDuration from '../../../helpers/pipeDuration';
+import mockedAuthorsList from '../../../mockedAuthorsList';
+import './CourseCard.css';
 
-const CourseCard = ({title,desc,duration,date,authors}) => {
+const CourseCard = ({ course }) => {
+  const authorNames = course.authors
+    .map(
+      (authorId) =>
+        mockedAuthorsList.find((author) => author.id === authorId)?.name
+    )
+    .join(', ');
   return (
-    <article className='course'>
-    <div className="course-left">
-        <h3 className='course-left-title'>{title}</h3>
-        <p className='course-left-text'>{desc}</p>
-    </div>
-    <div className="course-right">
+    <article className="course">
+      <div className="course-left">
+        <h3 className="course-left-title">{course.title}</h3>
+        <p className="course-left-text">{course.description}</p>
+      </div>
+      <div className="course-right">
         <div className="course-right-block">
-        <p className='course-right-block-authors'>Authors:{authors}</p>
-        <p>Duration:{duration}</p>
-        <p>Created:{date}</p>
+          <p className="course-right-block-authors">Authors:{authorNames}</p>
+          <p>Duration:{pipeDuration(course.duration)} hours</p>
+          <p>Created:{course.creationDate}</p>
         </div>
-        <Button text="Show Course"/>
-    </div>
+        <Button buttonText="Show Course" />
+      </div>
     </article>
-  )
-}
+  );
+};
 
-export default CourseCard
+export default CourseCard;
