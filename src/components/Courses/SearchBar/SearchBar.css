@@ -1,4 +1,10 @@
 .searchbar{
     display: flex;
+    flex: 0.6;
+    align-items: center;
     gap: 10px;
+}
+
+.searchbar  input {
+    height: 27px;
 }

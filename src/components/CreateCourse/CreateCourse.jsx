@@ -4,7 +4,7 @@ import './CreateCourse.css';
 import mockedAuthorsList from '../../mockedAuthorsList';
 import pipeDuration from '../../helpers/pipeDuration';
 import { useState } from 'react';
-const CreateCourse = ({ activeForm, setCoursesList }) => {
+const CreateCourse = ({ setCoursesList }) => {
   const [authorArray, setAuthorArray] = useState(mockedAuthorsList);
   const [courseAuthors, setCourseAuthors] = useState([]);
   const [duration, setDuration] = useState(0);
@@ -29,7 +29,6 @@ const CreateCourse = ({ activeForm, setCoursesList }) => {
       description: e.target.description.value.trim(),
     };
     setCoursesList((prev) => [...prev, newCourse]);
-    activeForm(false);
   }
 
   function changeTime(e) {

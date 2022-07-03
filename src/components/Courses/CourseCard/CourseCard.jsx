@@ -1,4 +1,5 @@
 import Button from '../../../common/Button';
+import dateGenerator from '../../../helpers/dateGenerator';
 import pipeDuration from '../../../helpers/pipeDuration';
 import mockedAuthorsList from '../../../mockedAuthorsList';
 import './CourseCard.css';
@@ -20,7 +21,7 @@ const CourseCard = ({ course }) => {
         <div className="course-right-block">
           <p className="course-right-block-authors">Authors:{authorNames}</p>
           <p>Duration:{pipeDuration(course.duration)} hours</p>
-          <p>Created:{course.creationDate}</p>
+          <p>Created:{dateGenerator(course.creationDate)}</p>
         </div>
         <Button buttonText="Show Course" />
       </div>

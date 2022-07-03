@@ -3,14 +3,13 @@ import SearchBar from './SearchBar/SearchBar';
 import './Courses.css';
 import CourseCard from './CourseCard/CourseCard';
 
-const Courses = ({ activeForm, coursesList }) => {
+const Courses = ({ coursesList,setCoursesList }) => {
   function changeFormState() {
-    activeForm(true);
   }
   return (
     <div className="container main">
       <div className="main-top">
-        <SearchBar />
+        <SearchBar coursesList={coursesList} setCoursesList={setCoursesList} />
         <Button onClick={changeFormState} buttonText="Add New Course" />
       </div>
       <div>

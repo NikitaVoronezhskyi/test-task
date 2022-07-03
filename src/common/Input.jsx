@@ -4,7 +4,7 @@ const Input = ({ type, labelText, placeholderText, ...props }) => {
   return (
     <label className="input-wrapper">
       {labelText}
-      <input type={type || 'text'} {...props} placeholder={placeholderText} />
+      <input className='common-input' type={type || 'text'} {...props} placeholder={placeholderText} />
     </label>
   );
 };
