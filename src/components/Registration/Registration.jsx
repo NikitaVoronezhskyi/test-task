@@ -14,7 +14,7 @@ const Registration = () => {
     }
     navigate("/login");
   }
-  return (
+  return ( 
     <div className="container">
       <form className="registration" onSubmit={registerNewUser}>
         <h2>Registration</h2>

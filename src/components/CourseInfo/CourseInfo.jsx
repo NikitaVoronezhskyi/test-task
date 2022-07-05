@@ -9,10 +9,25 @@ const CourseInfo = ({ coursesList, authorList }) => {
   const [course, setCourse] = useState({});
   const navigate = useNavigate();
   const { courseId } = useParams();
+
+
   useEffect(() => {
     const ourCourse = coursesList.find((course) => course.id === courseId);
     setCourse(ourCourse);
-  }, [courseId, coursesList,authorList]);
+  }, [courseId, coursesList, authorList]);
+
+  function getAuthorNameList(courseAuthors) {
+    if (courseAuthors !== undefined) {
+      const author = courseAuthors.map(author => authorList.find(allAuthors => allAuthors.id === author).name)
+      return (
+        <ul className="courseCard-block-list-item-authors-block-list">
+          {author.map(renderedAuthor =>  <li className="courseCard-block-list-item-authors-block-list-item">{renderedAuthor}</li>)}
+        </ul>
+      )
+    }
+
+  }
+  
 
 
   function backToCourses() {
@@ -48,7 +63,7 @@ const CourseInfo = ({ coursesList, authorList }) => {
           <li className="courseCard-block-list-item courseCard-block-list-item-authors">
             <dt className="courseCard-block-list-item-title">Authors:</dt>
             <dd className="courseCard-block-list-item-authors-block">
-              {course.authors}
+              {getAuthorNameList(course.authors)}
             </dd>
           </li>
         </ul>
