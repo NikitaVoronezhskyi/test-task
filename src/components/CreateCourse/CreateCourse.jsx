@@ -1,20 +1,25 @@
 import Button from '../../common/Button';
 import Input from '../../common/Input';
 import './CreateCourse.css';
+import mockedCoursesList from '../../mockedAuthorsList';
 import mockedAuthorsList from '../../mockedAuthorsList';
 import pipeDuration from '../../helpers/pipeDuration';
 import { useState } from 'react';
-const CreateCourse = ({ setCoursesList }) => {
-  const [authorArray, setAuthorArray] = useState(mockedAuthorsList);
+import { useNavigate } from 'react-router-dom';
+
+const CreateCourse = ({ setCoursesList,setAuthorList,authorList }) => {
   const [courseAuthors, setCourseAuthors] = useState([]);
   const [duration, setDuration] = useState(0);
+  const navigate = useNavigate();
+
+
   function newAuthor(event) {
     event.preventDefault();
     const newAuthor = {
       id: Date.now(),
       name: event.target.newAuthorName.value.trim(),
     };
-    setAuthorArray((prev) => [...prev, newAuthor]);
+    setAuthorList((prev) => [...prev, newAuthor]);
     event.target.reset();
   }
 
@@ -29,6 +34,8 @@ const CreateCourse = ({ setCoursesList }) => {
       description: e.target.description.value.trim(),
     };
     setCoursesList((prev) => [...prev, newCourse]);
+    e.target.reset();
+    navigate('/courses')
   }
 
   function changeTime(e) {
@@ -37,13 +44,13 @@ const CreateCourse = ({ setCoursesList }) => {
 
   function addAuthorToCourse(currentAuthor) {
     setCourseAuthors((prev) => [...prev, currentAuthor]);
-    setAuthorArray(
-      authorArray.filter((author) => author.id !== currentAuthor.id)
+    setAuthorList(
+      authorList.filter((author) => author.id !== currentAuthor.id)
     );
   }
 
   function removeAuthorFromCourse(currentAuthor) {
-    setAuthorArray((prev) => [...prev, currentAuthor]);
+    setAuthorList((prev) => [...prev, currentAuthor]);
     setCourseAuthors(
       courseAuthors.filter((author) => author.id !== currentAuthor.id)
     );
@@ -105,7 +112,7 @@ const CreateCourse = ({ setCoursesList }) => {
           <div className="createcourse-bottom-right-allauthors">
             <h3 className="createcourse-heading">Authors</h3>
             <ul className="createcourse-bottom-right-list">
-              {authorArray.map((author) => {
+              {authorList.map((author) => {
                 return (
                   <li
                     key={author.id}

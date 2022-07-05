@@ -10,3 +10,9 @@
     color: white;
     background: purple;
 }
+
+.courseCard-btn{
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}

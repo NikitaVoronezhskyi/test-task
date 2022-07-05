@@ -1,0 +1,52 @@
+.courseCard{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid blue;
+    margin-top: 30px;
+    padding: 15px;
+    min-height: 75vh;
+
+}
+
+.courseCard-title{
+    font-weight: 600;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.courseCard-text{
+    font-size: 20px;
+    flex: 0.7;
+}
+
+.courseCard-block{
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.courseCard-block-list{
+    display: flex;
+    flex: 0.2;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.courseCard-block-list-item{
+    display: flex;
+    gap: 10px;
+}
+
+.courseCard-block-list-item-authors{
+    display: flex;
+    flex-direction: column;
+}
+
+.courseCard-block-list-item-authors-block{
+    display: flex;
+    flex-direction: column;
+}
+
+.courseCard-block-list-item-title{
+    font-weight: 600;
+}

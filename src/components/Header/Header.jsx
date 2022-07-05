@@ -1,8 +1,13 @@
 import Button from '../../common/Button';
 import Logo from './components/Logo/Logo';
+import { useNavigate } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
+  const navigate = useNavigate()
+  function logout() {
+    navigate('/login')
+  }
   return (
     <header className="header">
       <div className="container">
@@ -10,7 +15,7 @@ const Header = () => {
           <Logo />
           <div className="navbar-right">
             <p>Dave</p>
-            <Button size="btn-sm" buttonText="Logout" />
+            <Button onClick={logout} size="btn-sm" buttonText="Logout" />
           </div>
         </nav>
       </div>

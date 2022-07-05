@@ -1,16 +1,16 @@
+import { useNavigate } from 'react-router-dom';
 import Button from '../../../common/Button';
 import dateGenerator from '../../../helpers/dateGenerator';
 import pipeDuration from '../../../helpers/pipeDuration';
 import mockedAuthorsList from '../../../mockedAuthorsList';
 import './CourseCard.css';
 
-const CourseCard = ({ course }) => {
-  const authorNames = course.authors
-    .map(
-      (authorId) =>
-        mockedAuthorsList.find((author) => author.id === authorId)?.name
-    )
-    .join(', ');
+const CourseCard = ({ course,authorList }) => {
+  const navigate = useNavigate()
+  function showCourseCard() {
+    navigate(`/courses/${course.id}`);
+  }
+  const authorNames = course.authors.map((authorId) =>mockedAuthorsList.find((author) => author.id === authorId)?.name).join(', ');
   return (
     <article className="course">
       <div className="course-left">
@@ -23,7 +23,7 @@ const CourseCard = ({ course }) => {
           <p>Duration:{pipeDuration(course.duration)} hours</p>
           <p>Created:{dateGenerator(course.creationDate)}</p>
         </div>
-        <Button buttonText="Show Course" />
+        <Button onClick={showCourseCard} buttonText="Show Course" />
       </div>
     </article>
   );

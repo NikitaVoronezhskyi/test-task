@@ -1,6 +1,5 @@
 import "./Registration.css";
 import Input from "../../common/Input";
-import Header from "../Header/Header";
 import Button from "../../common/Button";
 import { Link, useNavigate } from "react-router-dom";
 

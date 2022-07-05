@@ -7,10 +7,10 @@ const SearchBar = ({coursesList,setCoursesList}) => {
   function searchCourse(event){
     event.preventDefault();
     const searchingText = (event.target.search.value).trim().toLowerCase()
-    const filteredArray = mockedCoursesList.filter(course => `${course.title} ${course.id}`.toLowerCase().includes(searchingText));
+    const filteredArray = coursesList.filter(course => `${course.title} ${course.id}`.toLowerCase().includes(searchingText));
     if (filteredArray.length === 0) {
       alert("No Matching Found")
-      setCoursesList(mockedCoursesList)
+      setCoursesList(coursesList)
     } else {
       setCoursesList(filteredArray)
     }
